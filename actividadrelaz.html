@@ -11,6 +11,10 @@
         <h1>Relaciona los Ataques Cibernéticos</h1>
         <p>Arrastra cada ataque hacia su definición correcta.</p>
 
+        <div class="score-container">
+            <span>Puntuación: <span id="score">0</span></span>
+        </div>
+
         <div class="game-container">
             <div class="left">
                 <h3>Ataques</h3>
@@ -28,10 +32,13 @@
                 <div class="droppable" data-match="ingenieria">🔵 Manipulación psicológica para obtener acceso a sistemas o datos.</div>
             </div>
         </div>
-        
+
         <div id="message"></div>
+
+        <button id="restart-btn">Reiniciar Juego</button>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
