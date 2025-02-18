@@ -59,3 +59,26 @@ body {
     font-size: 18px;
     font-weight: bold;
 }
+
+/* Estilo para la puntuación */
+.score-container {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Botón de reinicio */
+#restart-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#restart-btn:hover {
+    background-color: #0056b3;
+}
