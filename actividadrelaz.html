@@ -17,7 +17,7 @@
         </div>
 
         <div class="game-container">
-            <div class="left">
+            <div class="left" id="attacks">
                 <h3>Ataques</h3>
                 <div class="draggable" draggable="true" id="phishing">Phishing</div>
                 <div class="draggable" draggable="true" id="malware">Malware</div>
@@ -83,7 +83,29 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        let attempts = 0;
+        document.querySelectorAll(".droppable").forEach(dropzone => {
+            dropzone.addEventListener("drop", function(event) {
+                event.preventDefault();
+                let attackId = event.dataTransfer.getData("text");
+                let draggedElement = document.getElementById(attackId);
+                
+                if (attackId !== dropzone.getAttribute("data-match")) {
+                    document.getElementById("message").textContent = "¡Fallaste!";
+                    draggedElement.remove();
+                    attempts++;
+                    if (attempts >= 2) {
+                        document.getElementById("restart-btn").style.display = "none";
+                    }
+                } else {
+                    dropzone.appendChild(draggedElement);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
+
 
 
