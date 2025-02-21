@@ -2,23 +2,22 @@ document.addEventListener("DOMContentLoaded", function () {
   const draggables = document.querySelectorAll(".draggable");
   const droppables = document.querySelectorAll(".droppable");
   const restartBtn = document.getElementById("restart-btn");
-  
-  const finalScoreDisplay = document.getElementById("final-score");
-  const highestScoreDisplay = document.getElementById("highest-score");
   const message = document.getElementById("message");
+  const finalScoreDisplay = document.getElementById("final-score");
+  const scoreDisplay = document.getElementById("score");
 
-  let attempts = 0;
-  let score = 0;
-  let highestScore = 0;
+  let attempts = 0;    // Conteo de intentos (máximo 2)
+  let score = 0;       // Puntuación
+  const maxAttempts = 2;
 
-  // Arrastrable
+  // Habilitar dragstart
   draggables.forEach(draggable => {
     draggable.addEventListener("dragstart", function (event) {
       event.dataTransfer.setData("text", event.target.id);
     });
   });
 
-  // Droppable
+  // Habilitar drop
   droppables.forEach(droppable => {
     droppable.addEventListener("dragover", function (event) {
       event.preventDefault();
@@ -26,83 +25,88 @@ document.addEventListener("DOMContentLoaded", function () {
 
     droppable.addEventListener("drop", function (event) {
       event.preventDefault();
+
       const draggedId = event.dataTransfer.getData("text");
       const draggedElement = document.getElementById(draggedId);
 
-      // Validación de coincidencia
-      if (draggedElement && this.getAttribute("data-match") === draggedId) {
+      // Chequeo de coincidencia
+      if (draggedElement && draggedId === this.getAttribute("data-match")) {
+        // Correcto
         this.appendChild(draggedElement);
-        this.classList.add("correct");
 
-        // Aumentar puntuación
+        // Sumamos 10 puntos (o lo que indique data-score)
         let points = parseInt(draggedElement.getAttribute("data-score")) || 10;
         score += points;
-        document.getElementById("score").innerText = score;
+        scoreDisplay.textContent = score;
 
-        message.textContent = "¡Buen trabajo! Sigue con los demás.";
+        message.textContent = "¡Correcto! Sigue colocando los demás.";
       } else {
-        this.classList.add("wrong");
-        message.textContent = "¡Fallaste! Acomódalo de nuevo o revisa otra opción.";
-        setTimeout(() => {
-          this.classList.remove("wrong");
-        }, 1000);
+        // Incorrecto: el ataque desaparece
+        if (draggedElement) {
+          draggedElement.remove();
+        }
+        message.textContent = "¡Fallaste! Este ataque desaparece.";
       }
     });
   });
 
-  /**
-   * Manejo del botón Reiniciar:
-   * Cada vez que presionen, se acaba un intento. Si es su segundo intento,
-   * el botón desaparece y mostramos la calificación más alta.
-   */
+  // Botón: Finaliza el intento actual
   restartBtn.addEventListener("click", function () {
     attempts++;
 
-    // Actualizamos la calificación más alta si corresponde
-    if (score > highestScore) {
-      highestScore = score;
-    }
-
-    if (attempts < 2) {
-      // Primer intento finalizado: Reiniciamos pero todavía queda otro intento
+    if (attempts < maxAttempts) {
+      // Primer intento finalizado: Reiniciamos tablero
       resetGame();
-      message.textContent = `Intento ${attempts} finalizado. ¡Tienes otro intento!`;
+      message.textContent = `Terminaste el intento ${attempts}. ¡A jugar de nuevo!`;
     } else {
-      // Segundo intento finalizado: ocultamos el botón
-      restartBtn.style.display = "none";
+      // Segundo intento: se acaba el juego
+      restartBtn.style.display = "none";          // Ocultamos botón
       finalScoreDisplay.classList.remove("hidden");
-      finalScoreDisplay.textContent = `Tu puntuación en este intento fue: ${score}`;
-      
-      highestScoreDisplay.classList.remove("hidden");
-      highestScoreDisplay.textContent = `Tu calificación más alta fue: ${highestScore}`;
+      finalScoreDisplay.textContent = `Tu puntuación final fue: ${score}`;
 
-      message.textContent = "¡Has agotado tus intentos!";
+      message.textContent = "Has agotado tus intentos. Juego finalizado.";
+
+      // Opcional: poner en gris las definiciones
+      droppables.forEach(droppable => {
+        droppable.style.backgroundColor = "lightgray";
+      });
     }
   });
 
-  /**
-   * Función para reiniciar el juego (mantener la lógica, pero resetear puntuación y el área).
-   */
+  // Función que reinicia el tablero, sin afectar el número de intentos
   function resetGame() {
-    // Opcional: si quieres que se conserve la puntuación entre intentos, elimina la siguiente línea
+    // Puedes decidir si reinicias la puntuación aquí o la mantienes
+    // Para el ejemplo, reiniciamos la puntuación en cada nuevo intento
     score = 0;
-    document.getElementById("score").innerText = score;
+    scoreDisplay.textContent = score;
     message.textContent = "";
 
-    finalScoreDisplay.classList.add("hidden");
-    highestScoreDisplay.classList.add("hidden");
-
-    // Dejar las definiciones vacías y volver a colocar los ataques en su contenedor original
     droppables.forEach(droppable => {
-      droppable.innerHTML = droppable.getAttribute("data-match"); // Resetea el texto
-      droppable.classList.remove("correct", "wrong");
+      // Vacía cada dropzone y recupera su texto original
+      droppable.innerHTML = droppable.getAttribute("data-match");
+      droppable.style.backgroundColor = "";  // Quita color gris si lo tuviera
     });
 
+    // Regresamos los ataques a su contenedor original
     const leftContainer = document.getElementById("attacks");
-    draggables.forEach(draggable => {
-      leftContainer.appendChild(draggable);
+    // Reconstruimos los ataques
+    leftContainer.innerHTML = `
+      <h3>Ataques</h3>
+      <div class="draggable" draggable="true" id="phishing" data-score="10">Phishing</div>
+      <div class="draggable" draggable="true" id="malware" data-score="10">Malware</div>
+      <div class="draggable" draggable="true" id="ransomware" data-score="10">Ransomware</div>
+      <div class="draggable" draggable="true" id="ingenieria" data-score="10">Ingeniería Social</div>
+    `;
+
+    // Volvemos a habilitar dragstart para los ataques recién creados
+    const newDraggables = leftContainer.querySelectorAll(".draggable");
+    newDraggables.forEach(draggable => {
+      draggable.addEventListener("dragstart", function (event) {
+        event.dataTransfer.setData("text", event.target.id);
+      });
     });
   }
 });
+
 
 
