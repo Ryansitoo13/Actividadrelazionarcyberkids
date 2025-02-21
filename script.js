@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const finalScoreDisplay = document.getElementById("final-score");
   const scoreDisplay = document.getElementById("score");
 
-  let attempts = 0;         // Número de intentos
-  let score = 0;            // Puntuación
-  const maxAttempts = 2;    // Máximo de 2 intentos
+  let attempts = 0;       // Número de intentos
+  let score = 0;          // Puntuación
+  const maxAttempts = 2;  // Máximo de 2 intentos
 
   // Habilitar dragstart
   draggables.forEach(draggable => {
@@ -37,32 +37,33 @@ document.addEventListener("DOMContentLoaded", function () {
         scoreDisplay.textContent = score;
         message.textContent = "¡Correcto! Sigue con los demás.";
       } else {
-        // Incorrecto
+        // Incorrecto => el ataque desaparece
         if (draggedElement) {
-          draggedElement.remove();  // Ataque eliminado si falla
+          draggedElement.remove();
         }
+        message.style.color = "red";
         message.textContent = "¡Fallaste!";
       }
     });
   });
 
-  // Botón: Finaliza el intento actual
+  // Botón para finalizar cada intento
   restartBtn.addEventListener("click", function () {
     attempts++;
-
     if (attempts < maxAttempts) {
-      // Terminó el 1er intento: Reinicia para el 2do
+      // Terminó el primer intento
       resetGame();
       message.style.color = "green";
       message.textContent = `Terminaste el intento ${attempts}. ¡A jugar de nuevo!`;
     } else {
-      // Segundo intento: Fin del juego
-      restartBtn.style.display = "none"; 
+      // Segundo intento => fin del juego
+      restartBtn.style.display = "none";
       finalScoreDisplay.classList.remove("hidden");
       finalScoreDisplay.textContent = `Tu puntuación final fue: ${score}`;
+      message.style.color = "blue";
       message.textContent = "Has agotado tus intentos. Juego finalizado.";
 
-      // Ponemos en gris las definiciones (opcional)
+      // Opcional: poner en gris las definiciones
       droppables.forEach(droppable => {
         droppable.style.backgroundColor = "lightgray";
       });
@@ -71,17 +72,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Función que reinicia el tablero
   function resetGame() {
-    // Reiniciamos la puntuación en el siguiente intento
+    // Reiniciar puntuación (si quieres conservar la del 1er intento, quita esto)
     score = 0;
     scoreDisplay.textContent = score;
 
-    // Devolvemos las definiciones originales
+    // Volver a texto original de definiciones
     droppables.forEach(droppable => {
-      droppable.textContent = droppable.getAttribute("data-original");
+      droppable.innerHTML = droppable.getAttribute("data-original");
       droppable.style.backgroundColor = "";
     });
 
-    // Regresamos los ataques a su contenedor (reconstruimos HTML)
+    // Reconstruir ataques
     const leftContainer = document.getElementById("attacks");
     leftContainer.innerHTML = `
       <h3>Ataques</h3>
@@ -91,11 +92,11 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="draggable" draggable="true" id="ingenieria" data-score="10">Ingeniería Social</div>
     `;
 
-    // Restablecemos el mensaje
+    // Quitar mensajes y color
     message.textContent = "";
     message.style.color = "black";
 
-    // Volver a enlazar eventos dragstart en los nuevos ataques
+    // Volver a habilitar dragstart en los ataques reconstruidos
     const newDraggables = leftContainer.querySelectorAll(".draggable");
     newDraggables.forEach(draggable => {
       draggable.addEventListener("dragstart", function (event) {
@@ -104,6 +105,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-
 
 
