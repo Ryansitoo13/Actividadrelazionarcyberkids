@@ -1,89 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relaciona los Ataques Cibernéticos</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Relaciona los Ataques Cibernéticos</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Relaciona los Ataques Cibernéticos</h1>
-        <p>Arrastra cada ataque hacia su definición correcta.</p>
-
-        <div class="score-container">
-            <span>Puntuación: <span id="score">0</span></span>
-            <p><strong style="color: red;">¡Solo tienes 2 intentos!</strong></p>
+  <div class="container">
+    <h1>Relaciona los Ataques Cibernéticos</h1>
+    <p>Arrastra cada ataque hacia su definición correcta.</p>
+    
+    <div class="score-container">
+      <span>Puntuación: <span id="score">0</span></span>
+      <p><strong style="color: red;">¡Solo tienes 2 intentos!</strong></p>
+    </div>
+    
+    <div class="game-container">
+      <div class="left" id="attacks">
+        <h3>Ataques</h3>
+        <!-- data-score es el puntaje otorgado por cada ataque -->
+        <div class="draggable" draggable="true" id="phishing" data-score="10">Phishing</div>
+        <div class="draggable" draggable="true" id="malware" data-score="10">Malware</div>
+        <div class="draggable" draggable="true" id="ransomware" data-score="10">Ransomware</div>
+        <div class="draggable" draggable="true" id="ingenieria" data-score="10">Ingeniería Social</div>
+      </div>
+      <div class="right">
+        <h3>Definiciones</h3>
+        <div class="droppable" data-match="phishing">
+          🟢 Método que engaña a las personas para obtener información confidencial.
         </div>
-
-        <div class="game-container">
-            <div class="left" id="attacks">
-                <h3>Ataques</h3>
-                <div class="draggable" draggable="true" id="phishing" data-score="10">Phishing</div>
-                <div class="draggable" draggable="true" id="malware" data-score="10">Malware</div>
-                <div class="draggable" draggable="true" id="ransomware" data-score="10">Ransomware</div>
-                <div class="draggable" draggable="true" id="ingenieria" data-score="10">Ingeniería Social</div>
-            </div>
-
-            <div class="right">
-                <h3>Definiciones</h3>
-                <div class="droppable" data-match="phishing">🟢 Método que engaña a las personas para obtener información confidencial.</div>
-                <div class="droppable" data-match="malware">🔴 Software malicioso diseñado para dañar o infiltrarse en un sistema.</div>
-                <div class="droppable" data-match="ransomware">🟡 Bloquea archivos del usuario y exige un pago para liberarlos.</div>
-                <div class="droppable" data-match="ingenieria">🔵 Manipulación psicológica para obtener acceso a sistemas o datos.</div>
-            </div>
+        <div class="droppable" data-match="malware">
+          🔴 Software malicioso diseñado para dañar o infiltrarse en un sistema.
         </div>
-
-        <div id="message"></div>
-        <button id="restart-btn">Reiniciar Juego</button>
-        <p id="final-score" class="hidden"></p>
-        <p id="highest-score" class="hidden"></p>
+        <div class="droppable" data-match="ransomware">
+          🟡 Bloquea archivos del usuario y exige un pago para liberarlos.
+        </div>
+        <div class="droppable" data-match="ingenieria">
+          🔵 Manipulación psicológica para obtener acceso a sistemas o datos.
+        </div>
+      </div>
     </div>
 
-    <!-- Pie de página con la sección de Contacto -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Enlaces útiles</h3>
-                <ul>
-                    <li><a href="https://cyberkids.odoo.com/" target="_blank" rel="noopener noreferrer">Inicio</a></li>
-                    <li><a href="#">Sobre nosotros</a></li>
-                    <li><a href="#">Servicios</a></li>
-                    <li><a href="#">Legal</a></li>
-                    <li><a href="https://cyberkids.odoo.com/contactus">Contáctenos</a></li>
-                </ul>
-            </div>
+    <div id="message"></div>
+    <button id="restart-btn">Reiniciar (Fin de Intento)</button>
 
-            <div class="footer-section">
-                <h3>Sobre nosotros</h3>
-                <p>Somos un equipo de personas cuyo objetivo es mejorar la concientización acerca de la ciberseguridad en la niñez en Costa Rica. Brindamos métodos interesantes sobre conceptos y materia en seguridad informática.</p>
-                <p>Estamos disponibles para adaptarnos a nuevas tecnologías relevantes en este campo.</p>
-            </div>
+    <p id="final-score" class="hidden"></p>
+    <p id="highest-score" class="hidden"></p>
+  </div>
 
-            <div class="footer-section">
-                <h3>Contáctenos</h3>
-                <p>📩 cyberkidsoficial@gmail.com</p>
-                <p>📞 +1 555-555-5556</p>
-                <div class="social-icons">
-                    <a href="https://facebook.com" target="_blank">
-                        <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/facebook.png" alt="Facebook">
-                    </a>
-                    <a href="https://twitter.com" target="_blank">
-                        <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/twitter.png" alt="Twitter">
-                    </a>
-                    <a href="https://linkedin.com" target="_blank">
-                        <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/linkedin.png" alt="LinkedIn">
-                    </a>
-                    <a href="https://cyberkids.odoo.com/" target="_blank">
-                        <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/home-icon-silhouette.png" alt="Inicio">
-                    </a>
-                </div>
-            </div>
+  <!-- Pie de página con la sección de Contacto -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Enlaces útiles</h3>
+        <ul>
+          <li><a href="https://cyberkids.odoo.com/" target="_blank" rel="noopener noreferrer">Inicio</a></li>
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Legal</a></li>
+          <li><a href="https://cyberkids.odoo.com/contactus">Contáctenos</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Sobre nosotros</h3>
+        <p>Somos un equipo de personas cuyo objetivo es mejorar la concientización acerca de la ciberseguridad en la niñez en Costa Rica.</p>
+        <p>Estamos disponibles para adaptarnos a nuevas tecnologías relevantes en este campo.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contáctenos</h3>
+        <p>📩 cyberkidsoficial@gmail.com</p>
+        <p>📞 +1 555-555-5556</p>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank">
+            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/facebook.png" alt="Facebook"/>
+          </a>
+          <a href="https://twitter.com" target="_blank">
+            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/twitter.png" alt="Twitter"/>
+          </a>
+          <a href="https://linkedin.com" target="_blank">
+            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/linkedin.png" alt="LinkedIn"/>
+          </a>
+          <a href="https://cyberkids.odoo.com/" target="_blank">
+            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/home-icon-silhouette.png" alt="Inicio"/>
+          </a>
         </div>
-        <p class="footer-copy">Derechos de autor y nombre de la empresa</p>
-    </footer>
+      </div>
+    </div>
+    <p class="footer-copy">Derechos de autor y nombre de la empresa</p>
+  </footer>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
 
