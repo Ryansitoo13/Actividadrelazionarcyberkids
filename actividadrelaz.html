@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Relaciona los Ataques Cibernéticos</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -10,21 +9,21 @@
   <div class="container">
     <h1>Relaciona los Ataques Cibernéticos</h1>
     <p>Arrastra cada ataque hacia su definición correcta.</p>
-    
+
     <div class="score-container">
       <span>Puntuación: <span id="score">0</span></span>
       <p><strong style="color: red;">¡Solo tienes 2 intentos!</strong></p>
     </div>
-    
+
     <div class="game-container">
       <div class="left" id="attacks">
         <h3>Ataques</h3>
-        <!-- data-score es el puntaje otorgado por cada ataque -->
         <div class="draggable" draggable="true" id="phishing" data-score="10">Phishing</div>
         <div class="draggable" draggable="true" id="malware" data-score="10">Malware</div>
         <div class="draggable" draggable="true" id="ransomware" data-score="10">Ransomware</div>
         <div class="draggable" draggable="true" id="ingenieria" data-score="10">Ingeniería Social</div>
       </div>
+
       <div class="right">
         <h3>Definiciones</h3>
         <div class="droppable" data-match="phishing">
@@ -43,10 +42,10 @@
     </div>
 
     <div id="message"></div>
+    <!-- Botón que finaliza el intento actual (1er o 2do) -->
     <button id="restart-btn">Reiniciar (Fin de Intento)</button>
 
     <p id="final-score" class="hidden"></p>
-    <p id="highest-score" class="hidden"></p>
   </div>
 
   <!-- Pie de página con la sección de Contacto -->
@@ -90,6 +89,7 @@
     <p class="footer-copy">Derechos de autor y nombre de la empresa</p>
   </footer>
 
+  <!-- Tu archivo JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
