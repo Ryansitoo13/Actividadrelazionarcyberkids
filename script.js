@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (draggedElement) {
           draggedElement.remove();
         }
-        message.textContent = "¡Fallaste! Este ataque desaparece.";
+        message.textContent = "¡Fallaste! ";
       }
     });
   });
