@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (draggedElement && this.getAttribute("data-match") === draggedId) {
                 this.appendChild(draggedElement);
                 this.classList.add("correct");
-                score++; // Aumenta la puntuación
+                score += 10; // Ahora aumenta en 10 en lugar de 1
                 document.getElementById("score").innerText = score;
             } else {
                 this.classList.add("wrong");
