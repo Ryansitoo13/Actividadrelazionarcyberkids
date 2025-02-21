@@ -101,7 +101,7 @@
                     }
                 } else {
                     dropzone.appendChild(draggedElement);
-                    score += 10;
+                    score = Math.floor(score / 10) * 10 + 10;
                     document.getElementById("score").textContent = score;
                 }
             });
@@ -109,6 +109,5 @@
     </script>
 </body>
 </html>
-
 
 
