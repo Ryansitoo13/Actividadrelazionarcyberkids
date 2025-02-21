@@ -18,7 +18,6 @@
     <div class="game-container">
       <div class="left" id="attacks">
         <h3>Ataques</h3>
-        <!-- data-score es el puntaje otorgado por cada ataque -->
         <div class="draggable" draggable="true" id="phishing" data-score="10">Phishing</div>
         <div class="draggable" draggable="true" id="malware" data-score="10">Malware</div>
         <div class="draggable" draggable="true" id="ransomware" data-score="10">Ransomware</div>
@@ -27,28 +26,29 @@
 
       <div class="right">
         <h3>Definiciones</h3>
-
-        <!-- Agregamos data-original con el texto completo de la definición -->
-        <div class="droppable" 
-             data-match="phishing" 
+        
+        <!--  data-match: coincide con el 'id' del ataque
+              data-original: guarda el texto completo para restaurarlo tras reiniciar -->
+        <div class="droppable"
+             data-match="phishing"
              data-original="🟢 Método que engaña a las personas para obtener información confidencial.">
           🟢 Método que engaña a las personas para obtener información confidencial.
         </div>
 
-        <div class="droppable" 
-             data-match="malware" 
+        <div class="droppable"
+             data-match="malware"
              data-original="🔴 Software malicioso diseñado para dañar o infiltrarse en un sistema.">
           🔴 Software malicioso diseñado para dañar o infiltrarse en un sistema.
         </div>
 
-        <div class="droppable" 
-             data-match="ransomware" 
+        <div class="droppable"
+             data-match="ransomware"
              data-original="🟡 Bloquea archivos del usuario y exige un pago para liberarlos.">
           🟡 Bloquea archivos del usuario y exige un pago para liberarlos.
         </div>
 
-        <div class="droppable" 
-             data-match="ingenieria" 
+        <div class="droppable"
+             data-match="ingenieria"
              data-original="🔵 Manipulación psicológica para obtener acceso a sistemas o datos.">
           🔵 Manipulación psicológica para obtener acceso a sistemas o datos.
         </div>
@@ -56,9 +56,7 @@
     </div>
 
     <div id="message"></div>
-    <!-- Botón para finalizar cada intento -->
     <button id="restart-btn">Reiniciar (Fin de Intento)</button>
-
     <p id="final-score" class="hidden"></p>
   </div>
 
@@ -102,8 +100,6 @@
     </div>
     <p class="footer-copy">Derechos de autor y nombre de la empresa</p>
   </footer>
-
-  <!-- Archivo JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
