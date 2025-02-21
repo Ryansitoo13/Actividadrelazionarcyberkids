@@ -26,37 +26,26 @@
 
       <div class="right">
         <h3>Definiciones</h3>
-        
-        <!--  data-match: coincide con el 'id' del ataque
-              data-original: guarda el texto completo para restaurarlo tras reiniciar -->
-        <div class="droppable"
-             data-match="phishing"
-             data-original="🟢 Método que engaña a las personas para obtener información confidencial.">
+        <!-- Cada droppable mantiene su texto completo y un data-match para validar el ID -->
+        <div class="droppable" data-match="phishing">
           🟢 Método que engaña a las personas para obtener información confidencial.
         </div>
-
-        <div class="droppable"
-             data-match="malware"
-             data-original="🔴 Software malicioso diseñado para dañar o infiltrarse en un sistema.">
+        <div class="droppable" data-match="malware">
           🔴 Software malicioso diseñado para dañar o infiltrarse en un sistema.
         </div>
-
-        <div class="droppable"
-             data-match="ransomware"
-             data-original="🟡 Bloquea archivos del usuario y exige un pago para liberarlos.">
+        <div class="droppable" data-match="ransomware">
           🟡 Bloquea archivos del usuario y exige un pago para liberarlos.
         </div>
-
-        <div class="droppable"
-             data-match="ingenieria"
-             data-original="🔵 Manipulación psicológica para obtener acceso a sistemas o datos.">
+        <div class="droppable" data-match="ingenieria">
           🔵 Manipulación psicológica para obtener acceso a sistemas o datos.
         </div>
       </div>
     </div>
 
     <div id="message"></div>
+    <!-- Botón para finalizar cada intento -->
     <button id="restart-btn">Reiniciar (Fin de Intento)</button>
+
     <p id="final-score" class="hidden"></p>
   </div>
 
@@ -100,7 +89,10 @@
     </div>
     <p class="footer-copy">Derechos de autor y nombre de la empresa</p>
   </footer>
+
+  <!-- Tu archivo JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
+
 
