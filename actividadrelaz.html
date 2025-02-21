@@ -85,6 +85,7 @@
     <script src="script.js"></script>
     <script>
         let attempts = 0;
+        let score = 0;
         document.querySelectorAll(".droppable").forEach(dropzone => {
             dropzone.addEventListener("drop", function(event) {
                 event.preventDefault();
@@ -100,6 +101,8 @@
                     }
                 } else {
                     dropzone.appendChild(draggedElement);
+                    score += 10;
+                    document.getElementById("score").textContent = score;
                 }
             });
         });
