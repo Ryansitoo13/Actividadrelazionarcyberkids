@@ -1,6 +1,13 @@
-/* ======================= */
-/*  Estilos Generales  */
-/* ======================= */
+
+/* ===========================
+   Reseteo básico y estilos globales 
+=========================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -10,33 +17,40 @@ body {
     text-align: center;
 }
 
-/* Contenedor principal */
 .container {
     max-width: 900px;
     margin: 50px auto;
     background: white;
     padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 10px;
 }
 
-/* ======================= */
-/*  Títulos y Textos  */
-/* ======================= */
+/* ===========================
+   Textos y Títulos
+=========================== */
 
 h1 {
     font-size: 24px;
     color: #333;
+    margin-bottom: 10px;
 }
 
 p {
     font-size: 16px;
     color: #555;
+    margin-bottom: 10px;
 }
 
-/* ======================= */
-/*  Sección de Juego  */
-/* ======================= */
+h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* ===========================
+   Contenedor del Juego
+=========================== */
 
 .game-container {
     display: flex;
@@ -46,15 +60,30 @@ p {
 
 .left, .right {
     width: 45%;
+    padding: 10px;
 }
 
-h3 {
+/* ===========================
+   Puntuación y Mensajes
+=========================== */
+
+.score-container {
     font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
     color: #333;
-    margin-bottom: 10px;
 }
 
-/* Estilos para los elementos arrastrables */
+#message {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* ===========================
+   Elementos Arrastrables
+=========================== */
+
 .draggable {
     background-color: #4CAF50;
     color: white;
@@ -69,31 +98,45 @@ h3 {
     background-color: #45a049;
 }
 
-/* Estilos para las áreas donde se deben soltar los elementos */
+/* ===========================
+   Áreas de Definición (Droppable)
+=========================== */
+
 .droppable {
     background-color: #ddd;
     padding: 15px;
     border-radius: 5px;
     margin: 5px;
     font-size: 16px;
-    min-height: 40px;
+    min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    text-align: center;
 }
 
-/* Mensaje de validación */
-#message {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #27ae60;
+/* ===========================
+   Estilos Especiales al Acertar
+=========================== */
+
+.correct-drop {
+    border: 2px solid #2ecc71;   /* Borde verde */
+    background-color: #ddffdd;   /* Fondo verde claro */
 }
 
-/* ======================= */
-/*  Botón Reiniciar  */
-/* ======================= */
+/* ===========================
+   Estado final
+=========================== */
+
+.finalized-drop {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* ===========================
+   Botón de Reiniciar
+=========================== */
 
 #restart-btn {
     background-color: #007BFF;
@@ -110,19 +153,25 @@ h3 {
     background-color: #0056b3;
 }
 
-/* ======================= */
-/*  Sección de Puntuación  */
-/* ======================= */
+/* ===========================
+   Texto Final de Puntuación
+=========================== */
 
-.score-container {
+#final-score {
+    margin-top: 20px;
     font-size: 18px;
     font-weight: bold;
-    margin: 10px 0;
+    color: #333;
 }
 
-/* ======================= */
-/*  Estilos del Footer (Pie de Página)  */
-/* ======================= */
+/* Ocultar inicialmente los elementos marcados como .hidden */
+.hidden {
+    display: none;
+}
+
+/* ===========================
+   Footer
+=========================== */
 
 footer {
     background-color: #222;
@@ -145,25 +194,24 @@ footer {
     min-width: 250px;
 }
 
-/* Forzar que el texto en el footer sea blanco */
+/* Forzar texto en blanco en el footer */
 .footer-section h3,
 .footer-section p,
 .footer-section a {
     color: white !important;
 }
 
-/* Estilos para los enlaces del footer */
+/* Enlaces del footer */
 .footer-section a {
     text-decoration: none;
     font-weight: bold;
-    color: white;
 }
 
 .footer-section a:hover {
     color: #f1c40f;
 }
 
-/* Ajustar los iconos para que sean visibles en fondo oscuro */
+/* Iconos de redes sociales */
 .social-icons img {
     width: 30px;
     height: 30px;
@@ -171,7 +219,6 @@ footer {
     margin: 5px;
 }
 
-/* Texto de derechos de autor */
 .footer-copy {
     margin-top: 15px;
     font-size: 14px;
