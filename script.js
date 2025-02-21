@@ -6,18 +6,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const finalScoreDisplay = document.getElementById("final-score");
   const scoreDisplay = document.getElementById("score");
 
-  let attempts = 0;       // Número de intentos
-  let score = 0;          // Puntuación
-  const maxAttempts = 2;  // Máximo de 2 intentos
+  let attempts = 0;       
+  let score = 0;          
+  const maxAttempts = 2;  
 
-  // Habilitar dragstart
+  // Activar arrastre en los .draggable
   draggables.forEach(draggable => {
     draggable.addEventListener("dragstart", function (event) {
       event.dataTransfer.setData("text", event.target.id);
     });
   });
 
-  // Habilitar drop
+  // Manejo de drop en las definiciones
   droppables.forEach(droppable => {
     droppable.addEventListener("dragover", function (event) {
       event.preventDefault();
@@ -28,16 +28,23 @@ document.addEventListener("DOMContentLoaded", function () {
       const draggedId = event.dataTransfer.getData("text");
       const draggedElement = document.getElementById(draggedId);
 
-      // Validar coincidencia
-      if (draggedElement && draggedId === this.getAttribute("data-match")) {
-        // Correcto
-        this.appendChild(draggedElement);
+      // Validar coincidencia con data-match
+      if (draggedElement && droppable.getAttribute("data-match") === draggedId) {
+        // ¡Correcto!
         let points = parseInt(draggedElement.getAttribute("data-score")) || 10;
         score += points;
         scoreDisplay.textContent = score;
-        message.textContent = "¡Correcto! Sigue con los demás.";
+
+        // Marcar visualmente la definición como correcta (sin cambiar su texto)
+        droppable.classList.add("correct-drop");
+
+        // El ataque desaparece de la izquierda
+        draggedElement.remove();
+
+        message.style.color = "green";
+        message.textContent = "¡Correcto! Sigue colocando los demás.";
       } else {
-        // Incorrecto => el ataque desaparece
+        // ¡Incorrecto! Se elimina el ataque
         if (draggedElement) {
           draggedElement.remove();
         }
@@ -50,8 +57,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Botón para finalizar cada intento
   restartBtn.addEventListener("click", function () {
     attempts++;
+
     if (attempts < maxAttempts) {
-      // Terminó el primer intento
+      // Primer intento terminado => reiniciamos el tablero
       resetGame();
       message.style.color = "green";
       message.textContent = `Terminaste el intento ${attempts}. ¡A jugar de nuevo!`;
@@ -63,26 +71,28 @@ document.addEventListener("DOMContentLoaded", function () {
       message.style.color = "blue";
       message.textContent = "Has agotado tus intentos. Juego finalizado.";
 
-      // Opcional: poner en gris las definiciones
-      droppables.forEach(droppable => {
-        droppable.style.backgroundColor = "lightgray";
+      // Opcional: bloquear las definiciones o marcarlas
+      droppables.forEach(d => {
+        d.classList.add("finalized-drop");
       });
     }
   });
 
-  // Función que reinicia el tablero
   function resetGame() {
-    // Reiniciar puntuación (si quieres conservar la del 1er intento, quita esto)
+    // Reiniciar puntaje (si quieres sumarlo entre intentos, coméntalo)
     score = 0;
     scoreDisplay.textContent = score;
 
-    // Volver a texto original de definiciones
-    droppables.forEach(droppable => {
-      droppable.innerHTML = droppable.getAttribute("data-original");
-      droppable.style.backgroundColor = "";
+    message.textContent = "";
+    message.style.color = "black";
+    finalScoreDisplay.classList.add("hidden");
+
+    // Quitar clase correct-drop/finalized-drop
+    droppables.forEach(d => {
+      d.classList.remove("correct-drop", "finalized-drop");
     });
 
-    // Reconstruir ataques
+    // Restaurar la columna de Ataques
     const leftContainer = document.getElementById("attacks");
     leftContainer.innerHTML = `
       <h3>Ataques</h3>
@@ -92,18 +102,15 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="draggable" draggable="true" id="ingenieria" data-score="10">Ingeniería Social</div>
     `;
 
-    // Quitar mensajes y color
-    message.textContent = "";
-    message.style.color = "black";
-
-    // Volver a habilitar dragstart en los ataques reconstruidos
+    // Volver a habilitar dragstart en estos nuevos .draggable
     const newDraggables = leftContainer.querySelectorAll(".draggable");
-    newDraggables.forEach(draggable => {
-      draggable.addEventListener("dragstart", function (event) {
-        event.dataTransfer.setData("text", event.target.id);
+    newDraggables.forEach(d => {
+      d.addEventListener("dragstart", e => {
+        e.dataTransfer.setData("text", e.target.id);
       });
     });
   }
 });
+
 
 
