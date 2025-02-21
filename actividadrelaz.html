@@ -19,10 +19,10 @@
         <div class="game-container">
             <div class="left" id="attacks">
                 <h3>Ataques</h3>
-                <div class="draggable" draggable="true" id="phishing">Phishing</div>
-                <div class="draggable" draggable="true" id="malware">Malware</div>
-                <div class="draggable" draggable="true" id="ransomware">Ransomware</div>
-                <div class="draggable" draggable="true" id="ingenieria">Ingeniería Social</div>
+                <div class="draggable" draggable="true" id="phishing" data-score="10">Phishing</div>
+                <div class="draggable" draggable="true" id="malware" data-score="10">Malware</div>
+                <div class="draggable" draggable="true" id="ransomware" data-score="10">Ransomware</div>
+                <div class="draggable" draggable="true" id="ingenieria" data-score="10">Ingeniería Social</div>
             </div>
 
             <div class="right">
@@ -37,6 +37,7 @@
         <div id="message"></div>
         <button id="restart-btn">Reiniciar Juego</button>
         <p id="final-score" class="hidden"></p>
+        <p id="highest-score" class="hidden"></p>
     </div>
 
     <!-- Pie de página con la sección de Contacto -->
@@ -83,30 +84,6 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        let attempts = 0;
-        let score = 0;
-        document.querySelectorAll(".droppable").forEach(dropzone => {
-            dropzone.addEventListener("drop", function(event) {
-                event.preventDefault();
-                let attackId = event.dataTransfer.getData("text");
-                let draggedElement = document.getElementById(attackId);
-                
-                if (attackId !== dropzone.getAttribute("data-match")) {
-                    document.getElementById("message").textContent = "¡Fallaste!";
-                    draggedElement.remove();
-                    attempts++;
-                    if (attempts >= 2) {
-                        document.getElementById("restart-btn").style.display = "none";
-                    }
-                } else {
-                    dropzone.appendChild(draggedElement);
-                    score = Math.floor(score / 10) * 10 + 10;
-                    document.getElementById("score").textContent = score;
-                }
-            });
-        });
-    </script>
 </body>
 </html>
 
