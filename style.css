@@ -1,35 +1,30 @@
-
 /* ===========================
    Reseteo básico y estilos globales 
 =========================== */
 
-* {
-    box-sizing: border-box;
+html, body {
     margin: 0;
     padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
+    width: 100%;
     background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+    font-family: Arial, sans-serif;
 }
 
+/* Contenedor principal */
 .container {
     max-width: 900px;
-    margin: 50px auto;
+    width: 95%;
+    margin: 40px auto; /* Centrado con espacio arriba/abajo */
     background: white;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 10px;
+    text-align: center;
 }
 
 /* ===========================
-   Textos y Títulos
+   Títulos y textos
 =========================== */
-
 h1 {
     font-size: 24px;
     color: #333;
@@ -51,7 +46,6 @@ h3 {
 /* ===========================
    Contenedor del Juego
 =========================== */
-
 .game-container {
     display: flex;
     justify-content: space-between;
@@ -66,7 +60,6 @@ h3 {
 /* ===========================
    Puntuación y Mensajes
 =========================== */
-
 .score-container {
     font-size: 18px;
     font-weight: bold;
@@ -83,7 +76,6 @@ h3 {
 /* ===========================
    Elementos Arrastrables
 =========================== */
-
 .draggable {
     background-color: #4CAF50;
     color: white;
@@ -101,7 +93,6 @@ h3 {
 /* ===========================
    Áreas de Definición (Droppable)
 =========================== */
-
 .droppable {
     background-color: #ddd;
     padding: 15px;
@@ -117,9 +108,8 @@ h3 {
 }
 
 /* ===========================
-   Estilos Especiales al Acertar
+   Estilos al Acertar
 =========================== */
-
 .correct-drop {
     border: 2px solid #2ecc71;   /* Borde verde */
     background-color: #ddffdd;   /* Fondo verde claro */
@@ -128,7 +118,6 @@ h3 {
 /* ===========================
    Estado final
 =========================== */
-
 .finalized-drop {
     background-color: #ccc;
     cursor: not-allowed;
@@ -137,7 +126,6 @@ h3 {
 /* ===========================
    Botón de Reiniciar
 =========================== */
-
 #restart-btn {
     background-color: #007BFF;
     color: white;
@@ -156,7 +144,6 @@ h3 {
 /* ===========================
    Texto Final de Puntuación
 =========================== */
-
 #final-score {
     margin-top: 20px;
     font-size: 18px;
@@ -170,12 +157,11 @@ h3 {
 }
 
 /* ===========================
-   Footer
+   Footer 
 =========================== */
-
 footer {
     background-color: #222;
-    color: white !important;
+    color: white;
     padding: 20px;
     text-align: center;
     margin-top: 30px;
@@ -194,11 +180,10 @@ footer {
     min-width: 250px;
 }
 
-/* Forzar texto en blanco en el footer */
 .footer-section h3,
 .footer-section p,
 .footer-section a {
-    color: white !important;
+    color: white;
 }
 
 /* Enlaces del footer */
@@ -223,6 +208,5 @@ footer {
     margin-top: 15px;
     font-size: 14px;
     opacity: 0.7;
-    color: white !important;
+    color: white;
 }
-
