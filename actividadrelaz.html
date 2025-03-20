@@ -4,6 +4,17 @@
   <meta charset="UTF-8" />
   <title>Relaciona los Ataques Cibernéticos</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Asegurar que el fondo sea blanco y evitar el espacio vacío */
+    body {
+      background-color: white;
+      margin: 0;
+      padding-bottom: 50px; /* Espacio extra al final */
+    }
+    .container {
+      padding-bottom: 50px; /* Espacio antes del footer de Odoo */
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -26,7 +37,6 @@
 
       <div class="right">
         <h3>Definiciones</h3>
-        <!-- Cada droppable mantiene su texto completo y un data-match para validar el ID -->
         <div class="droppable" data-match="phishing">
           🟢 Método que engaña a las personas para obtener información confidencial.
         </div>
@@ -43,56 +53,13 @@
     </div>
 
     <div id="message"></div>
-    <!-- Botón para finalizar cada intento -->
     <button id="restart-btn">Reiniciar (Fin de Intento)</button>
 
     <p id="final-score" class="hidden"></p>
   </div>
 
-  <!-- Pie de página con la sección de Contacto -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-section">
-        <h3>Enlaces útiles</h3>
-        <ul>
-          <li><a href="https://cyberkids.odoo.com/" target="_blank" rel="noopener noreferrer">Inicio</a></li>
-          <li><a href="#">Sobre nosotros</a></li>
-          <li><a href="#">Servicios</a></li>
-          <li><a href="#">Legal</a></li>
-          <li><a href="https://cyberkids.odoo.com/contactus">Contáctenos</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h3>Sobre nosotros</h3>
-        <p>Somos un equipo de personas cuyo objetivo es mejorar la concientización acerca de la ciberseguridad en la niñez en Costa Rica.</p>
-        <p>Estamos disponibles para adaptarnos a nuevas tecnologías relevantes en este campo.</p>
-      </div>
-      <div class="footer-section">
-        <h3>Contáctenos</h3>
-        <p>📩 cyberkidsoficial@gmail.com</p>
-        <p>📞 +1 555-555-5556</p>
-        <div class="social-icons">
-          <a href="https://facebook.com" target="_blank">
-            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/facebook.png" alt="Facebook"/>
-          </a>
-          <a href="https://twitter.com" target="_blank">
-            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/twitter.png" alt="Twitter"/>
-          </a>
-          <a href="https://linkedin.com" target="_blank">
-            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/linkedin.png" alt="LinkedIn"/>
-          </a>
-          <a href="https://cyberkids.odoo.com/" target="_blank">
-            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/home-icon-silhouette.png" alt="Inicio"/>
-          </a>
-        </div>
-      </div>
-    </div>
-    <p class="footer-copy">Derechos de autor y nombre de la empresa</p>
-  </footer>
-
   <!-- Tu archivo JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
-
 
