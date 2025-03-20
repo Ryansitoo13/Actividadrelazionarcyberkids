@@ -3,29 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <title>Relaciona los Ataques Cibernéticos</title>
+  <!-- Vincula tu archivo CSS -->
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Asegurar que el fondo sea blanco y evitar el espacio vacío */
-    body {
-      background-color: white;
-      margin: 0;
-      padding-bottom: 50px; /* Espacio extra al final */
-    }
-    .container {
-      padding-bottom: 50px; /* Espacio antes del footer de Odoo */
-    }
-  </style>
 </head>
 <body>
   <div class="container">
+    <!-- Título y Descripción -->
     <h1>Relaciona los Ataques Cibernéticos</h1>
     <p>Arrastra cada ataque hacia su definición correcta.</p>
 
+    <!-- Marcador de puntuación -->
     <div class="score-container">
       <span>Puntuación: <span id="score">0</span></span>
       <p><strong style="color: red;">¡Solo tienes 2 intentos!</strong></p>
     </div>
 
+    <!-- Zona de juego: Ataques a la izquierda y Definiciones a la derecha -->
     <div class="game-container">
       <div class="left" id="attacks">
         <h3>Ataques</h3>
@@ -52,14 +45,74 @@
       </div>
     </div>
 
+    <!-- Mensaje de aciertos/fallos -->
     <div id="message"></div>
+
+    <!-- Botón para reiniciar cada intento -->
     <button id="restart-btn">Reiniciar (Fin de Intento)</button>
 
+    <!-- Puntuación final (oculta al inicio) -->
     <p id="final-score" class="hidden"></p>
   </div>
 
-  <!-- Tu archivo JavaScript -->
+  <!-- Footer con enlaces útiles (se ocultará si estamos en iframe) -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Enlaces útiles</h3>
+        <ul>
+          <li><a href="https://cyberkids.odoo.com/" target="_blank" rel="noopener noreferrer">Inicio</a></li>
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Legal</a></li>
+          <li><a href="https://cyberkids.odoo.com/contactus">Contáctenos</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Sobre nosotros</h3>
+        <p>Somos un equipo de personas cuyo objetivo es mejorar la concientización acerca de la ciberseguridad en la niñez en Costa Rica.</p>
+        <p>Estamos disponibles para adaptarnos a nuevas tecnologías relevantes en este campo.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contáctenos</h3>
+        <p>📩 cyberkidsoficial@gmail.com</p>
+        <p>📞 +1 555-555-5556</p>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank">
+            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/facebook.png" alt="Facebook"/>
+          </a>
+          <a href="https://twitter.com" target="_blank">
+            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/twitter.png" alt="Twitter"/>
+          </a>
+          <a href="https://linkedin.com" target="_blank">
+            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/linkedin.png" alt="LinkedIn"/>
+          </a>
+          <a href="https://cyberkids.odoo.com/" target="_blank">
+            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/home-icon-silhouette.png" alt="Inicio"/>
+          </a>
+        </div>
+      </div>
+    </div>
+    <p class="footer-copy">Derechos de autor y nombre de la empresa</p>
+  </footer>
+
+  <!-- Script principal de la lógica de juego -->
   <script src="script.js"></script>
+
+  <!-- Script para ocultar el footer si está en iframe -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Si la ventana actual es distinta de la ventana superior => estamos en un iframe
+      if (window.self !== window.top) {
+        const footer = document.querySelector("footer");
+        if (footer) {
+          footer.style.display = "none";  // Oculta el footer dentro del iframe
+        }
+      }
+    });
+  </script>
+
 </body>
 </html>
+
 
