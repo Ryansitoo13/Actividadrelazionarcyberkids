@@ -1,118 +1,148 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Relaciona los Ataques Cibernéticos</title>
-  <!-- Vincula tu archivo CSS -->
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="container">
-    <!-- Título y Descripción -->
-    <h1>Relaciona los Ataques Cibernéticos</h1>
-    <p>Arrastra cada ataque hacia su definición correcta.</p>
+<div class="container">
+  <h1>Relaciona los Ataques Cibernéticos</h1>
+  <p>Arrastra cada ataque hacia su definición correcta.</p>
 
-    <!-- Marcador de puntuación -->
-    <div class="score-container">
-      <span>Puntuación: <span id="score">0</span></span>
-      <p><strong style="color: red;">¡Solo tienes 2 intentos!</strong></p>
-    </div>
-
-    <!-- Zona de juego: Ataques a la izquierda y Definiciones a la derecha -->
-    <div class="game-container">
-      <div class="left" id="attacks">
-        <h3>Ataques</h3>
-        <div class="draggable" draggable="true" id="phishing" data-score="10">Phishing</div>
-        <div class="draggable" draggable="true" id="malware" data-score="10">Malware</div>
-        <div class="draggable" draggable="true" id="ransomware" data-score="10">Ransomware</div>
-        <div class="draggable" draggable="true" id="ingenieria" data-score="10">Ingeniería Social</div>
-      </div>
-
-      <div class="right">
-        <h3>Definiciones</h3>
-        <div class="droppable" data-match="phishing">
-          🟢 Método que engaña a las personas para obtener información confidencial.
-        </div>
-        <div class="droppable" data-match="malware">
-          🔴 Software malicioso diseñado para dañar o infiltrarse en un sistema.
-        </div>
-        <div class="droppable" data-match="ransomware">
-          🟡 Bloquea archivos del usuario y exige un pago para liberarlos.
-        </div>
-        <div class="droppable" data-match="ingenieria">
-          🔵 Manipulación psicológica para obtener acceso a sistemas o datos.
-        </div>
-      </div>
-    </div>
-
-    <!-- Mensaje de aciertos/fallos -->
-    <div id="message"></div>
-
-    <!-- Botón para reiniciar cada intento -->
-    <button id="restart-btn">Reiniciar (Fin de Intento)</button>
-
-    <!-- Puntuación final (oculta al inicio) -->
-    <p id="final-score" class="hidden"></p>
+  <!-- Barra superior con marcador e intentos -->
+  <div class="score-container" style="display: flex; align-items: center; justify-content: space-between;">
+    <span>Puntuación: <span id="score">0</span></span>
+    <p><strong style="color: red;">¡Solo tienes 5 intentos!</strong></p>
+    <button id="restart-btn">🔁 Reiniciar Juego</button>
   </div>
 
-  <!-- Footer con enlaces útiles (se ocultará si estamos en iframe) -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-section">
-        <h3>Enlaces útiles</h3>
-        <ul>
-          <li><a href="https://cyberkids.odoo.com/" target="_blank" rel="noopener noreferrer">Inicio</a></li>
-          <li><a href="#">Sobre nosotros</a></li>
-          <li><a href="#">Servicios</a></li>
-          <li><a href="#">Legal</a></li>
-          <li><a href="https://cyberkids.odoo.com/contactus">Contáctenos</a></li>
-        </ul>
+  <!-- Juego: arrastrar -->
+  <div class="game-container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+    <div class="left" id="attacks">
+      <h3>Ataques</h3>
+      <div class="draggable" draggable="true" id="phishing" data-match="phishing">Phishing</div>
+      <div class="draggable" draggable="true" id="malware" data-match="malware">Malware</div>
+      <div class="draggable" draggable="true" id="ransomware" data-match="ransomware">Ransomware</div>
+      <div class="draggable" draggable="true" id="ingenieria" data-match="ingenieria">Ingeniería Social</div>
+    </div>
+
+    <div class="right">
+      <h3>Definiciones</h3>
+      <div class="droppable" data-match="phishing">
+        🟢 Método que engaña a las personas para obtener información confidencial.
       </div>
-      <div class="footer-section">
-        <h3>Sobre nosotros</h3>
-        <p>Somos un equipo de personas cuyo objetivo es mejorar la concientización acerca de la ciberseguridad en la niñez en Costa Rica.</p>
-        <p>Estamos disponibles para adaptarnos a nuevas tecnologías relevantes en este campo.</p>
+      <div class="droppable" data-match="malware">
+        🔴 Software malicioso diseñado para dañar o infiltrarse en un sistema.
       </div>
-      <div class="footer-section">
-        <h3>Contáctenos</h3>
-        <p>📩 cyberkidsoficial@gmail.com</p>
-        <p>📞 +1 555-555-5556</p>
-        <div class="social-icons">
-          <a href="https://facebook.com" target="_blank">
-            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/facebook.png" alt="Facebook"/>
-          </a>
-          <a href="https://twitter.com" target="_blank">
-            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/twitter.png" alt="Twitter"/>
-          </a>
-          <a href="https://linkedin.com" target="_blank">
-            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/linkedin.png" alt="LinkedIn"/>
-          </a>
-          <a href="https://cyberkids.odoo.com/" target="_blank">
-            <img src="https://raw.githubusercontent.com/Ryansitoo13/Actividadrelazionarcyberkids/main/home-icon-silhouette.png" alt="Inicio"/>
-          </a>
-        </div>
+      <div class="droppable" data-match="ransomware">
+        🟡 Bloquea archivos del usuario y exige un pago para liberarlos.
+      </div>
+      <div class="droppable" data-match="ingenieria">
+        🔵 Manipulación psicológica para obtener acceso a sistemas o datos.
       </div>
     </div>
-    <p class="footer-copy">Derechos de autor y nombre de la empresa</p>
-  </footer>
+  </div>
 
-  <!-- Script principal de la lógica de juego -->
-  <script src="script.js"></script>
+  <div id="message" style="font-weight: bold; margin-top: 15px;"></div>
+  <p id="final-score" class="hidden"></p>
 
-  <!-- Script para ocultar el footer si está en iframe -->
+  <!-- Sonido de éxito -->
+  <audio id="winSound" src="https://raw.githubusercontent.com/Ryansitoo13/Sounf-memory-gaame/main/success-1-6297.mp3" preload="auto"></audio>
+
+  <style>
+    .draggable, .droppable {
+      border: 2px dashed #ccc;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 8px;
+      background: #f9f9f9;
+      cursor: grab;
+      font-weight: bold;
+    }
+
+    .draggable.dragging {
+      opacity: 0.5;
+    }
+
+    .droppable.correct {
+      background-color: #c8e6c9;
+    }
+
+    .droppable.incorrect {
+      background-color: #ffcdd2;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #restart-btn {
+      padding: 8px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #restart-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Si la ventana actual es distinta de la ventana superior => estamos en un iframe
-      if (window.self !== window.top) {
-        const footer = document.querySelector("footer");
-        if (footer) {
-          footer.style.display = "none";  // Oculta el footer dentro del iframe
-        }
-      }
+    document.addEventListener("DOMContentLoaded", function () {
+      const draggables = document.querySelectorAll(".draggable");
+      const droppables = document.querySelectorAll(".droppable");
+      const scoreDisplay = document.getElementById("score");
+      const message = document.getElementById("message");
+      const restartBtn = document.getElementById("restart-btn");
+      const winSound = document.getElementById("winSound");
+
+      let score = 0;
+      let attempts = 0;
+      const maxAttempts = 5;
+
+      draggables.forEach(drag => {
+        drag.addEventListener("dragstart", () => {
+          drag.classList.add("dragging");
+        });
+
+        drag.addEventListener("dragend", () => {
+          drag.classList.remove("dragging");
+        });
+      });
+
+      droppables.forEach(drop => {
+        drop.addEventListener("dragover", e => {
+          e.preventDefault();
+        });
+
+        drop.addEventListener("drop", () => {
+          const dragged = document.querySelector(".dragging");
+          if (!dragged || dragged.dataset.matched === "true") return;
+
+          attempts++;
+          if (dragged.dataset.match === drop.dataset.match) {
+            drop.classList.add("correct");
+            drop.appendChild(dragged);
+            dragged.setAttribute("draggable", "false");
+            dragged.dataset.matched = "true";
+            score += 10;
+            scoreDisplay.textContent = score;
+            winSound.play();
+            message.textContent = "✅ ¡Correcto!";
+          } else {
+            drop.classList.add("incorrect");
+            message.textContent = "❌ Esa no es la definición correcta.";
+            setTimeout(() => drop.classList.remove("incorrect"), 1000);
+          }
+
+          if (attempts >= maxAttempts) {
+            message.textContent = "🎯 Fin del juego. Tu puntaje fue: " + score;
+            draggables.forEach(d => d.setAttribute("draggable", "false"));
+          }
+        });
+      });
+
+      restartBtn.addEventListener("click", () => {
+        location.reload();
+      });
     });
   </script>
-
-</body>
-</html>
+</div>
 
 
