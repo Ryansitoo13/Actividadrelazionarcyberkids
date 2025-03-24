@@ -2,15 +2,13 @@
   <h1>Relaciona los Ataques Cibernéticos</h1>
   <p>Arrastra cada ataque hacia su definición correcta.</p>
 
-  <!-- Barra superior con marcador e intentos -->
-  <div class="score-container" style="display: flex; align-items: center; justify-content: space-between;">
+  <div class="score-container" style="display: flex; justify-content: space-between; align-items: center;">
     <span>Puntuación: <span id="score">0</span></span>
     <p><strong style="color: red;">¡Solo tienes 5 intentos!</strong></p>
     <button id="restart-btn">🔁 Reiniciar Juego</button>
   </div>
 
-  <!-- Juego: arrastrar -->
-  <div class="game-container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+  <div class="game-container">
     <div class="left" id="attacks">
       <h3>Ataques</h3>
       <div class="draggable" draggable="true" id="phishing" data-match="phishing">Phishing</div>
@@ -36,50 +34,122 @@
     </div>
   </div>
 
-  <div id="message" style="font-weight: bold; margin-top: 15px;"></div>
+  <div id="message"></div>
   <p id="final-score" class="hidden"></p>
 
-  <!-- Sonido de éxito -->
   <audio id="winSound" src="https://raw.githubusercontent.com/Ryansitoo13/Sounf-memory-gaame/main/success-1-6297.mp3" preload="auto"></audio>
 
   <style>
-    .draggable, .droppable {
-      border: 2px dashed #ccc;
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 95%;
+      margin: 40px auto;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    h1 { font-size: 24px; color: #333; margin-bottom: 10px; }
+    p { font-size: 16px; color: #555; margin-bottom: 10px; }
+    h3 { font-size: 18px; color: #333; margin-bottom: 10px; }
+
+    .game-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .left, .right {
+      width: 45%;
       padding: 10px;
-      margin: 10px;
-      border-radius: 8px;
-      background: #f9f9f9;
-      cursor: grab;
+    }
+
+    .score-container {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
       font-weight: bold;
     }
 
-    .draggable.dragging {
-      opacity: 0.5;
+    .draggable {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: grab;
+      font-size: 16px;
     }
 
-    .droppable.correct {
-      background-color: #c8e6c9;
+    .draggable:hover {
+      background-color: #45a049;
     }
 
-    .droppable.incorrect {
-      background-color: #ffcdd2;
+    .droppable {
+      background-color: #ddd;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 5px;
+      font-size: 16px;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      text-align: center;
     }
 
-    .hidden {
-      display: none;
+    .correct-drop {
+      border: 2px solid #2ecc71;
+      background-color: #ddffdd;
+    }
+
+    .finalized-drop {
+      background-color: #ccc;
+      cursor: not-allowed;
     }
 
     #restart-btn {
-      padding: 8px 15px;
-      background-color: #007bff;
+      background-color: #007BFF;
       color: white;
       border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
       border-radius: 5px;
       cursor: pointer;
     }
 
     #restart-btn:hover {
       background-color: #0056b3;
+    }
+
+    #final-score {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 
@@ -100,24 +170,20 @@
         drag.addEventListener("dragstart", () => {
           drag.classList.add("dragging");
         });
-
         drag.addEventListener("dragend", () => {
           drag.classList.remove("dragging");
         });
       });
 
       droppables.forEach(drop => {
-        drop.addEventListener("dragover", e => {
-          e.preventDefault();
-        });
-
-        drop.addEventListener("drop", () => {
+        drop.addEventListener("dragover", e => e.preventDefault());
+        drop.addEventListener("drop", function () {
           const dragged = document.querySelector(".dragging");
           if (!dragged || dragged.dataset.matched === "true") return;
 
           attempts++;
           if (dragged.dataset.match === drop.dataset.match) {
-            drop.classList.add("correct");
+            drop.classList.add("correct-drop");
             drop.appendChild(dragged);
             dragged.setAttribute("draggable", "false");
             dragged.dataset.matched = "true";
@@ -126,9 +192,9 @@
             winSound.play();
             message.textContent = "✅ ¡Correcto!";
           } else {
-            drop.classList.add("incorrect");
+            drop.style.backgroundColor = "#ffcdd2";
             message.textContent = "❌ Esa no es la definición correcta.";
-            setTimeout(() => drop.classList.remove("incorrect"), 1000);
+            setTimeout(() => drop.style.backgroundColor = "#ddd", 1000);
           }
 
           if (attempts >= maxAttempts) {
@@ -144,5 +210,4 @@
     });
   </script>
 </div>
-
 
